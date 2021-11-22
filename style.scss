@@ -1,0 +1,12 @@
+$size: 100px;
+$border-color: red;
+
+@mixin ring($size, $border-color) {
+    border: $size/20 $border-color;
+    border-radius: 50%;
+    width: $size;
+    height: $size;
+    @if ($size > 100px) {
+        box-shadow: $size/20, $size/20, lighten($border-color, 20);
+    }
+}
