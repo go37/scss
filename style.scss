@@ -1,12 +1,46 @@
-$size: 100px;
-$border-color: red;
-
-@mixin ring($size, $border-color) {
-    border: $size/20 $border-color;
+//mixins
+@mixin ring ($size, $color) {
     border-radius: 50%;
     width: $size;
     height: $size;
-    @if ($size > 100px) {
-        box-shadow: $size/20, $size/20, lighten($border-color, 20);
+    border: ($size/10) $color solid;
+    box-shadow: inset ($size/50) ($size/50) ($size/50) 0 darken($color, 10), ($size/50) ($size/50) ($size/50) 0 darken($color, 10);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin: 20px;
+    font-size: 2rem;
+}
+
+article {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.first .ring {
+    @include ring(50px, #ff6905);
+}
+
+.second .ring {
+    @include ring(150px, #fcca01);
+}
+
+.third {
+    .pile {
+        display: flex;
+        align-items: center;
+        @for $i from 1 through 6 {
+            .ring-#{$i} {
+                @include ring(20px*$i, #373737);
+                margin-left: -5px*$i;
+            }
+        }
     }
 }
